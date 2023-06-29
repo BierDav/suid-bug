@@ -13,9 +13,23 @@ import {
     Title,
 } from "solid-start";
 import "./root.css";
-import {createTheme, ThemeProvider} from "@suid/material";
+import {createTheme, CssBaseline, ThemeProvider} from "@suid/material";
 import Scaffold from "~/ui/Scaffold";
 
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#ff0000',
+        },
+        secondary: {
+            main: '#00ff00',
+        },
+        error: {
+            main: '#0000ff',
+        },
+    }
+})
 export default function Root() {
     return (
         <Html lang="en">
@@ -27,13 +41,12 @@ export default function Root() {
             <Body>
                 <Suspense>
                     <ErrorBoundary>
-                        <A href="/">Index</A>
-                        <A href="/about">About</A>
-                        <Scaffold>
+                        <ThemeProvider theme={theme}>
+                            <CssBaseline enableColorScheme />
                             <Routes>
                                 <FileRoutes/>
                             </Routes>
-                        </Scaffold>
+                        </ThemeProvider>
                     </ErrorBoundary>
                 </Suspense>
                 <Scripts/>
